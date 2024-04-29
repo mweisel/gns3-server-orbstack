@@ -1,0 +1,32 @@
+---
+- name: get and install
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+
+- name: add gns3 user to libvirt system group
+  ansible.builtin.user:
+    name: gns3
+    groups: libvirt
+    append: true
+  become: true
+
+- name: get and install dependencies for virt_net ansible module
+  ansible.builtin.pip:
+    name: "{{ pip_packages }}"
+    executable: pip3
+    state: present
+  become: true
+
+- name: start default libvirt network
+  community.libvirt.virt_net:
+    name: default
+    state: active
+  become: true
+
+- name: autostart default libvirt network at boot
+  community.libvirt.virt_net:
+    name: default
+    autostart: true
+  become: true

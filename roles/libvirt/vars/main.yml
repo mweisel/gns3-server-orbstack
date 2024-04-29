@@ -1,0 +1,8 @@
+---
+packages:
+  - libvirt-daemon-system
+  - libvirt-clients
+  - libvirt-dev
+pip_packages:
+  - libvirt-python
+  - lxml

@@ -1,0 +1,12 @@
+---
+- name: create gns3 user
+  ansible.builtin.user:
+    name: gns3
+    home: /opt/gns3
+    system: true
+  become: true
+
+- name: create source code directory
+  ansible.builtin.file:
+    path: "{{ src_dir }}"
+    state: directory

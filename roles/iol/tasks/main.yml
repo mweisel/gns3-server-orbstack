@@ -1,0 +1,35 @@
+---
+- name: install libssl3
+  ansible.builtin.apt:
+    name: libssl3:i386
+    state: present
+  become: true
+
+- name: create libcrypto symlink
+  ansible.builtin.file:
+    src: /lib/i386-linux-gnu/libcrypt.so.1
+    dest: /usr/lib/libcrypto.so.4
+    state: link
+  become: true
+
+- name: prevent excesscoll iol error
+  ansible.posix.sysctl:
+    name: net.unix.max_dgram_qlen
+    value: "10000"
+    state: present
+  become: true
+
+- name: create demo iol license file
+  ansible.builtin.script: create_demo_iol_lic.py
+  args:
+    chdir: /opt/gns3
+    executable: python3
+    creates: /opt/gns3/iourc
+  become: true
+
+- name: change file ownership for demo iol license file
+  ansible.builtin.file:
+    path: /opt/gns3/iourc
+    owner: gns3
+    group: gns3
+  become: true

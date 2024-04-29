@@ -1,0 +1,4 @@
+---
+packages:
+  - python3-pip
+  - pkg-config

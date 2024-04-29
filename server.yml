@@ -1,0 +1,29 @@
+---
+- name: deploy gns3 server
+  hosts: gns3@orb
+  vars:
+    src_dir: "{{ ansible_env.HOME }}/src"
+
+  pre_tasks:
+    - name: update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      register: apt_result
+      until: apt_result is success
+      ignore_errors: true
+      retries: 3
+      delay: 3
+      become: true
+
+  roles:
+    - role: user
+    - role: i386-arch
+    - role: dynamips
+    - role: vpcs
+    - role: iol
+    - role: ubridge
+    - role: qemu
+    - role: pip3
+    - role: libvirt
+    - role: docker
+    - role: gns3

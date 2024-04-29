@@ -1,0 +1,15 @@
+---
+- name: check if i386 arch is enabled
+  ansible.builtin.command: dpkg --print-foreign-architectures
+  register: i386_check
+  changed_when: "'i386' not in i386_check.stdout"
+
+- block:
+    - name: enable i386 architecture
+      ansible.builtin.command: dpkg --add-architecture i386
+
+    - name: update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+  become: true
+  when: i386_check is changed

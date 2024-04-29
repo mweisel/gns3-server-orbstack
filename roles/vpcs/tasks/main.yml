@@ -1,0 +1,11 @@
+---
+- name: git clone (master branch)
+  ansible.builtin.git:
+    repo: https://github.com/GNS3/vpcs.git
+    dest: "{{ src_dir }}/vpcs"
+
+- name: perform source-based install
+  ansible.builtin.script: install_vpcs.sh
+  args:
+    chdir: "{{ src_dir }}/vpcs/src"
+    creates: /usr/local/bin/vpcs

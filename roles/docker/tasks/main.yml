@@ -1,0 +1,39 @@
+---
+- name: get and install dependencies
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+
+- name: get and install dependency for deb822_repository ansible module
+  ansible.builtin.pip:
+    name: python-debian
+    executable: pip3
+    state: present
+  become: true
+
+- name: add docker repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: [deb]
+    uris: "https://download.docker.com/linux/{{ ansible_distribution | lower }}"
+    signed_by: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    suites: ["{{ ansible_distribution_release | lower }}"]
+    components: [stable]
+    architectures: amd64
+    state: present
+    enabled: true
+  become: true
+
+- name: get and install
+  ansible.builtin.apt:
+    name: docker-ce
+    update_cache: true
+  become: true
+
+- name: add gns3 user to docker system group
+  ansible.builtin.user:
+    name: gns3
+    groups: docker
+    append: true
+  become: true

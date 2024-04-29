@@ -1,0 +1,8 @@
+---
+- name: restart gns3
+  ansible.builtin.systemd:
+    name: gns3
+    enabled: true
+    daemon_reload: true
+    state: restarted
+  become: true

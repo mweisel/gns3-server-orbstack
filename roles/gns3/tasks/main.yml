@@ -1,0 +1,43 @@
+---
+- name: get and install
+  ansible.builtin.pip:
+    name: gns3-server
+    version: "{{ gns3_version | default(omit) }}"
+    executable: pip3
+    state: present
+  notify:
+    - restart gns3
+  become: true
+
+- name: create directory for configuration file
+  ansible.builtin.file:
+    path: /etc/xdg/GNS3
+    state: directory
+    owner: gns3
+    group: gns3
+  become: true
+
+- name: create configuration file
+  ansible.builtin.copy:
+    src: gns3_server.conf
+    dest: /etc/xdg/GNS3/gns3_server.conf
+    owner: gns3
+    group: gns3
+  notify:
+    - restart gns3
+  become: true
+
+- name: create systemd unit file
+  ansible.builtin.copy:
+    src: gns3.service
+    dest: /etc/systemd/system/gns3.service
+  notify:
+    - restart gns3
+  become: true
+
+- name: enable and start service
+  ansible.builtin.systemd:
+    name: gns3
+    enabled: true
+    state: started
+  become: true

@@ -1,0 +1,37 @@
+---
+- name: get and install dependencies
+  ansible.builtin.apt:
+    name: "{{ packages }}"
+    state: present
+  become: true
+
+- name: git clone (master branch)
+  ansible.builtin.git:
+    repo: https://github.com/GNS3/dynamips.git
+    dest: "{{ src_dir }}/dynamips"
+  register: dynamips_source
+
+- block:
+    - name: create build directory
+      ansible.builtin.file:
+        path: "{{ src_dir }}/dynamips/build"
+        state: directory
+
+    - name: run cmake
+      ansible.builtin.command: cmake .. -DDYNAMIPS_ARCH=x86
+      args:
+        chdir: "{{ src_dir }}/dynamips/build"
+
+    - name: make install
+      community.general.make:
+        chdir: "{{ src_dir }}/dynamips/build"
+        target: install
+      become: true
+
+    - name: set capabilities
+      community.general.capabilities:
+        path: /usr/local/bin/dynamips
+        capability: cap_net_admin,cap_net_raw=ep
+        state: present
+      become: true
+  when: dynamips_source is changed

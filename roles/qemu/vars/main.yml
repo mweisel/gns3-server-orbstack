@@ -1,0 +1,4 @@
+---
+packages:
+  - qemu-system-x86
+  - sysfsutils
