@@ -5,13 +5,6 @@
     state: present
   become: true
 
-- name: get and install dependency for deb822_repository ansible module
-  ansible.builtin.pip:
-    name: python-debian
-    executable: pip3
-    state: present
-  become: true
-
 - name: add docker repository
   ansible.builtin.deb822_repository:
     name: docker

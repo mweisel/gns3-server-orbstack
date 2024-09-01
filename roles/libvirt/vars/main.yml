@@ -3,6 +3,5 @@ packages:
   - libvirt-daemon-system
   - libvirt-clients
   - libvirt-dev
-pip_packages:
-  - libvirt-python
-  - lxml
+  - python3-libvirt
+  - python3-lxml

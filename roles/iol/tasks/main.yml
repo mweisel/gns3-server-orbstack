@@ -7,7 +7,7 @@
 
 - name: create libcrypto symlink
   ansible.builtin.file:
-    src: /lib/i386-linux-gnu/libcrypt.so.1
+    src: /lib/i386-linux-gnu/libcrypto.so.3
     dest: /usr/lib/libcrypto.so.4
     state: link
   become: true

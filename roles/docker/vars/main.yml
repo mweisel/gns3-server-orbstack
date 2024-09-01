@@ -5,3 +5,4 @@ packages:
   - curl
   - software-properties-common
   - busybox-static
+  - python3-debian

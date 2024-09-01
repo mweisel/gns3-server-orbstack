@@ -12,13 +12,6 @@
     append: true
   become: true
 
-- name: get and install dependencies for virt_net ansible module
-  ansible.builtin.pip:
-    name: "{{ pip_packages }}"
-    executable: pip3
-    state: present
-  become: true
-
 - name: start default libvirt network
   community.libvirt.virt_net:
     name: default

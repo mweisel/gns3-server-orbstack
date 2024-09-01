@@ -3,8 +3,8 @@
   ansible.builtin.pip:
     name: gns3-server
     version: "{{ gns3_version | default(omit) }}"
-    executable: pip3
-    state: present
+    extra_args: --break-system-packages
+    state: latest
   notify:
     - restart gns3
   become: true

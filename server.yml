@@ -23,7 +23,7 @@
     - role: iol
     - role: ubridge
     - role: qemu
-    - role: pip3
     - role: libvirt
     - role: docker
+    - role: pip3
     - role: gns3
