@@ -4,7 +4,7 @@
     name: gns3-server
     version: "{{ gns3_version | default(omit) }}"
     extra_args: --break-system-packages
-    state: latest
+    state: present
   notify:
     - restart gns3
   become: true
