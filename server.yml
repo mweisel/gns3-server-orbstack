@@ -17,10 +17,8 @@
 
   roles:
     - role: user
-    - role: i386-arch
     - role: dynamips
     - role: vpcs
-    - role: iol
     - role: ubridge
     - role: qemu
     - role: libvirt

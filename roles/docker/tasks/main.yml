@@ -5,7 +5,7 @@
     state: present
   become: true
 
-- name: add docker repository
+- name: add repository
   ansible.builtin.deb822_repository:
     name: docker
     types: [deb]

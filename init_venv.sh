@@ -4,10 +4,10 @@ if ! hash python3; then
   return 1
 fi
 
-# Check if Python is version 3.8 or later
-python3 -c 'import sys; assert sys.version_info >= (3,8)' &> /dev/null
+# Check if Python is version 3.9 or later
+python3 -c 'import sys; assert sys.version_info >= (3,9)' &> /dev/null
 if [ $? -ne 0 ]; then
-  printf 'Python version 3.8 or later is required.\n'
+  printf 'Python version 3.9 or later is required.\n'
   return 1
 fi
 
@@ -18,9 +18,9 @@ fi
 python3 -m venv .venv && source .venv/bin/activate
 
 # Upgrade packaging tools
-pip install --upgrade pip setuptools
+python -m pip install --upgrade pip setuptools
 deactivate && source .venv/bin/activate
 
 # Install packages
-pip install --requirement requirements.txt
+python -m pip install --requirement requirements.txt
 deactivate && source .venv/bin/activate

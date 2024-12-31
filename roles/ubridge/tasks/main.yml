@@ -1,16 +1,16 @@
 ---
-- name: git clone ubridge (master branch)
+- name: git clone (master branch)
   ansible.builtin.git:
     repo: https://github.com/GNS3/ubridge.git
     dest: "{{ src_dir }}/ubridge"
   register: ubridge_source
 
 - block:
-    - name: make ubridge
+    - name: make
       community.general.make:
         chdir: "{{ src_dir }}/ubridge"
 
-    - name: make install ubridge
+    - name: make install
       community.general.make:
         chdir: "{{ src_dir }}/ubridge"
         target: install
