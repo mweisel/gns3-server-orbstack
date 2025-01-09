@@ -1,13 +1,27 @@
 ---
-- name: get and install
+- name: get and install dependencies
+  ansible.builtin.apt:
+    pkg:
+      - python3-pip
+      - python3-venv
+      - pkg-config
+  become: true
+
+- name: get and install pipx
   ansible.builtin.pip:
+    name: pipx
+    break_system_packages: true
+  become: true
+
+- name: get and install
+  community.general.pipx:
     name: gns3-server
     version: "{{ gns3_version | default(omit) }}"
-    extra_args: --break-system-packages
-    state: present
+    state: install
   notify:
     - restart gns3
   become: true
+  become_user: gns3
 
 - name: create directory for configuration file
   ansible.builtin.file:

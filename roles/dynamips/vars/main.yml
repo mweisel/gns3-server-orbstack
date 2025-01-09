@@ -1,6 +1,0 @@
----
-packages:
-  - libelf-dev
-  - libpcap0.8-dev
-  - cmake
-  - git

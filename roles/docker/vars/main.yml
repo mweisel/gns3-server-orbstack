@@ -1,8 +1,0 @@
----
-packages:
-  - apt-transport-https
-  - ca-certificates
-  - curl
-  - software-properties-common
-  - busybox-static
-  - python3-debian

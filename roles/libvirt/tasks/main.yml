@@ -1,8 +1,12 @@
 ---
 - name: get and install
   ansible.builtin.apt:
-    name: "{{ packages }}"
-    state: present
+    pkg:
+      - libvirt-daemon-system
+      - libvirt-clients
+      - libvirt-dev
+      - python3-libvirt
+      - python3-lxml
   become: true
 
 - name: add gns3 user to libvirt system group

@@ -1,8 +1,11 @@
 ---
 - name: get and install dependencies
   ansible.builtin.apt:
-    name: "{{ packages }}"
-    state: present
+    pkg:
+      - libelf-dev
+      - libpcap0.8-dev
+      - cmake
+      - git
   become: true
 
 - name: git clone (master branch)

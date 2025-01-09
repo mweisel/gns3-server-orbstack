@@ -1,6 +1,7 @@
 ---
 - name: get and install
   ansible.builtin.apt:
-    name: "{{ packages }}"
-    state: present
+    pkg:
+      - qemu-system-x86
+      - sysfsutils
   become: true

@@ -1,8 +1,13 @@
 ---
 - name: get and install dependencies
   ansible.builtin.apt:
-    name: "{{ packages }}"
-    state: present
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - busybox-static
+      - python3-debian
   become: true
 
 - name: add repository
