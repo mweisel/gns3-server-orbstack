@@ -2,7 +2,7 @@
 - name: deploy gns3 server
   hosts: gns3@orb
   vars:
-    src_dir: "{{ ansible_env.HOME }}/src"
+    src_dir: "{{ ansible_facts['env']['HOME'] }}/src"
 
   pre_tasks:
     - name: update apt cache
