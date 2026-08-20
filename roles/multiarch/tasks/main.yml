@@ -1,0 +1,20 @@
+---
+- name: check if amd64 arch is enabled
+  ansible.builtin.command: dpkg --print-foreign-architectures
+  register: amd64_check
+  changed_when: "'amd64' not in amd64_check.stdout_lines"
+
+- block:
+    - name: enable amd64 architecture
+      ansible.builtin.command: dpkg --add-architecture amd64
+
+    - name: modify apt sources
+      ansible.builtin.copy:
+        src: sources.list
+        dest: /etc/apt/sources.list
+
+    - name: update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+  become: true
+  when: amd64_check is changed

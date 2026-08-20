@@ -1,7 +1,0 @@
----
-- name: get and install
-  ansible.builtin.apt:
-    pkg:
-      - qemu-system-x86
-      - sysfsutils
-  become: true

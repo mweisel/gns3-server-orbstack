@@ -2,17 +2,14 @@
 
 # GNS3 server on Apple Silicon
 
-This project offers an automated deployment procedure for the [GNS3 server](https://github.com/GNS3/gns3-server) on an OrbStack [Linux machine](https://docs.orbstack.dev/architecture#linux-machines).
+This project automates the deployment of the [GNS3 server](https://github.com/GNS3/gns3-server) on an OrbStack [Linux machine](https://docs.orbstack.dev/architecture#linux-machines).
 
-The solution allows the following GNS3 devices to run *locally* on your Mac with Apple Silicon:
+This solution enables the following GNS3 devices to run *locally* on Apple Silicon Macs:
 
 - [Cisco Routers with Dynamips](https://marcstech.blog/archives/add-cisco-routers-dynamips-gns3-macos)
 - [Cisco IOL](https://marcstech.blog/archives/add-cisco-iol-devices-gns3-macos)
-- [Cisco IOSv](https://marcstech.blog/archives/add-cisco-iosv-devices-gns3-macos)
 - [Docker Containers](https://marcstech.blog/archives/create-docker-container-template-gns3-macos)
 - VPCS
-
-> Cisco IOSv will result in reduced performance because it does not utilize x86_64 KVM hardware acceleration.
 
 ## Guide
 

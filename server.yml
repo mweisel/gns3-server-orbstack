@@ -4,23 +4,11 @@
   vars:
     src_dir: "{{ ansible_facts['env']['HOME'] }}/src"
 
-  pre_tasks:
-    - name: update apt cache
-      ansible.builtin.apt:
-        update_cache: true
-      register: apt_result
-      until: apt_result is success
-      ignore_errors: true
-      retries: 3
-      delay: 3
-      become: true
-
   roles:
     - role: user
+    - role: multiarch
     - role: dynamips
     - role: vpcs
     - role: ubridge
-    - role: qemu
-    - role: libvirt
     - role: docker
     - role: gns3

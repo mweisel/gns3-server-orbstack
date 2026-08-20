@@ -2,9 +2,9 @@
 - name: get and install dependencies
   ansible.builtin.apt:
     pkg:
-      - libelf-dev
-      - libpcap0.8-dev
-      - cmake
+      - libelf-dev:amd64
+      - libpcap0.8-dev:amd64
+      - cmake:amd64
       - git
   become: true
 
